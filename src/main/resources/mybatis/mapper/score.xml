@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.score">
+	<resultMap id="scoreResult" type="ScoreVO">
+		<result property="id" column="id" />
+		<result property="score" column="score" />
+	</resultMap>
+	<select id="selectAllScores" resultMap="scoreResult">
+		SELECT * FROM t_score ORDER BY score DESC
+	</select>
+	<select id="selectScore" resultType="ScoreVO">
+		SELECT * FROM t_score WHERE id=#{id}
+	</select>
+	<insert id="insertScore" parameterType="ScoreVO">
+		INSERT INTO t_score(id, score)
+			VALUES(#{id}, #{score})
+	</insert>
+	<update id="updateScore" parameterType="ScoreVO">
+		UPDATE t_score SET score=score+#{score} WHERE id=#{id}
+	</update>
+	<delete id="deleteScore" parameterType="String">
+		DELETE FROM t_score WHERE articleNo=#{id}
+	</delete>
+</mapper>

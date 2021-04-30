@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	<definition name="main" extends="baseLayout">
+		<put-attribute name="title" value="메인 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/common/body.jsp" />
+		<put-attribute name="test" value="test test-" />
+	</definition>
+	<definition name="/member/listMembers" extends="baseLayout">
+		<put-attribute name="title" value="회원 명부" />
+		<put-attribute name="body" value="/WEB-INF/views/list.jsp" />
+	</definition>
+	<definition name="/member/test" extends="baseLayout">
+		<put-attribute name="title" value="회원 명부" />
+		<put-attribute name="body" value="/WEB-INF/views/test.jsp" />
+	</definition>
+	<definition name="/board/articles" extends="baseLayout">
+		<put-attribute name="title" value="게시글" />
+		<put-attribute name="body" value="/WEB-INF/views/articles.jsp" />
+	</definition>
+	<definition name="/board/article" extends="baseLayout">
+		<put-attribute name="title" value="게시글" />
+		<put-attribute name="body" value="/WEB-INF/views/article.jsp" />
+	</definition>
+	<definition name="/board/writeForm" extends="baseLayout">
+		<put-attribute name="title" value="게시글 작성" />
+		<put-attribute name="body" value="/WEB-INF/views/writeForm.jsp" />
+	</definition>
+	<definition name="/member/login" extends="baseLayout">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="body" value="/WEB-INF/views/loginForm.jsp" />
+	</definition>
+	<definition name="/member/signup" extends="baseLayout">
+		<put-attribute name="title" value="회원가입" />
+		<put-attribute name="body" value="/WEB-INF/views/signupForm.jsp" />
+	</definition>
+	<definition name="/board/edit" extends="baseLayout">
+		<put-attribute name="title" value="게시글 수정" />
+		<put-attribute name="body" value="/WEB-INF/views/editForm.jsp" />
+	</definition>
+	<definition name="/board/reply" extends="baseLayout">
+		<put-attribute name="title" value="답글 작성" />
+		<put-attribute name="body" value="/WEB-INF/views/replyForm.jsp" />
+	</definition>
+	<definition name="ugh" extends="baseLayout">
+		<put-attribute name="title" value="UGH!!!" />
+		<put-attribute name="body" value="/WEB-INF/views/ugh.jsp" />
+	</definition>
+	<definition name="lobby" extends="baseLayout">
+		<put-attribute name="title" value="Lobby" />
+		<put-attribute name="body" value="/WEB-INF/views/lobby.jsp" />
+	</definition>
+	<definition name="ranking" extends="baseLayout">
+		<put-attribute name="title" value="UGH!!! ranking" />
+		<put-attribute name="body" value="/WEB-INF/views/ranking.jsp" />
+	</definition>
+	<definition name="store" extends="baseLayout">
+		<put-attribute name="title" value="UGH!!! store" />
+		<put-attribute name="body" value="/WEB-INF/views/store.jsp" />
+	</definition>
+</tiles-definitions>

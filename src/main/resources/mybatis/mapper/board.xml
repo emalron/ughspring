@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.board">
+	<resultMap id="articleResult" type="ArticleVO">
+		<result property="lvl" column="lvl" />
+		<result property="articleNo" column="articleNo" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="writeDate" column="writeDate" />
+		<result property="id" column="id" />
+	</resultMap>
+	<select id="selectPage" resultMap="articleResult" parameterType="int">
+		SELECT * FROM (
+			SELECT ROWNUM as recNum, LVL, articleNo, title, id, content, writeDate FROM (
+				SELECT LEVEL as LVL, articleNo, title, id, content, writeDate FROM t_board
+				START WITH parentNo = 0
+				CONNECT BY PRIOR articleNo = parentNo
+				ORDER SIBLINGS BY articleNo DESC)
+			)
+		WHERE recNum BETWEEN (#{page}-1)*10 + 1 AND #{page}*10
+	</select>
+	<select id="selectAllArticles" resultMap="articleResult">
+		SELECT LEVEL, articleNo, title, id, content, writeDate FROM t_board
+		START WITH parentNo = 0
+		CONNECT BY PRIOR articleNo = parentNo
+		ORDER SIBLINGS BY articleNo DESC
+	</select>
+	<select id="selectTotalArticles" resultType="int">
+		SELECT COUNT(articleNo) FROM t_board
+	</select>
+	<select id="selectArticleByArticleNo" resultType="ArticleVO" parameterType="int">
+		SELECT articleNo, title, id, content, writeDate FROM t_board
+		WHERE articleNo=#{articleNo}
+	</select>
+	<insert id="insertArticle2" parameterType="ArticleVO" useGeneratedKeys="true" keyColumn="articleNo">
+		<selectKey keyProperty="articleNo" resultType="int" order="BEFORE">
+			SELECT AA.NEXTVAL FROM dual
+		</selectKey>
+			INSERT INTO t_board(articleNo, parentNo, title, content, id)
+			VALUES(#{articleNo}, #{parentNo}, #{title}, #{content}, #{id})
+	</insert>
+	<delete id="deleteArticle" parameterType="int">
+		DELETE FROM t_board WHERE articleNo=#{id}
+	</delete>
+	<update id="updateArticle" parameterType="articleVO">
+		UPDATE t_board SET content=#{content}, title=#{title} WHERE articleNo=#{articleNo}
+	</update>
+</mapper>

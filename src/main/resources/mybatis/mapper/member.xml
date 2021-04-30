@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.member">
+	<resultMap id="memResult" type="memberVO">
+		<result property="id" column="id" />
+		<result property="pwd" column="pwd" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+		<result property="joinDate" column="joinDate" />
+		<result property="coin" column="coin" />
+	</resultMap>
+	<select id="selectAllMembers" resultMap="memResult">
+		SELECT id, pwd, name, email, joinDate, coin FROM t_member
+	</select>
+	<select id="selectMemberById" resultType="memberVO" parameterType="String">
+		SELECT * FROM t_member WHERE id=#{id}
+	</select>
+	<select id="selectLoginMember" resultType="memberVO">
+		SELECT * FROM t_member WHERE id=#{id} and pwd=#{pwd}
+	</select>
+	<insert id="insertMember" parameterType="memberVO">
+		INSERT INTO t_member(id, pwd, name, email, coin)
+		VALUES(#{id}, #{pwd}, #{name}, #{email}, 10)
+	</insert>
+	<update id="updateMember" parameterType="memberVO">
+		UPDATE t_member SET pwd=#{pwd}, name=#{name}, email=#{email}, coin=#{coin}
+			WHERE id=#{id}
+	</update>
+</mapper>

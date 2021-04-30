@@ -1,0 +1,27 @@
+div.side {
+	width: 20%
+}
+
+div.body {
+	width: 80%
+}
+
+.title h1,
+.title h4 {
+	display: inline;
+}
+
+div.article {
+	margin-bottom: 16px;
+}
+
+canvas#jsdos {
+    zoom: 2.5;
+    margin: 0 auto;
+}
+
+span#score {
+    font-size: large;
+}
+span#current-score {
+}
