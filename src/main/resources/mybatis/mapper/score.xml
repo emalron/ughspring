@@ -22,6 +22,6 @@
 		DELETE FROM t_score WHERE articleNo=#{id}
 	</delete>
 	<select id="dbname" resultType="String">
-		SELECT name FROM v$database
+		SELECT name FROM dbinfo
 	</select>
 </mapper>

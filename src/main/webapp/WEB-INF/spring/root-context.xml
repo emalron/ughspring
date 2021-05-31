@@ -23,4 +23,8 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	<bean id="pathData" class="com.spring.pro30.PathVO">
+		<property name="savePath" value="${path.savePath}" />
+		<property name="loadUrl" value="${path.loadUrl}" />
+	</bean>
 </beans>

@@ -13,6 +13,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -129,8 +130,7 @@ public class ArticleController {
         return String.format("redirect:/board/%d", num);
     }
 
-    private static String loadURL = "/pro30/resources/images/";
-    private static String savePath = "C:\\Users\\pjm21\\Desktop\\web9\\pro30\\src\\main\\webapp\\resources\\images";
+    private static final ApplicationContext context = ApplicationContextProvider.getContext();
     @RequestMapping(value="/board/image.do", method=RequestMethod.POST)
     public ModelAndView image(HttpServletRequest request) throws Exception {
         ModelAndView mav = new ModelAndView("jsonView");
@@ -141,6 +141,9 @@ public class ArticleController {
                 String originalFilename = file.getOriginalFilename();
                 String ext = FilenameUtils.getExtension(originalFilename);
                 String newImageName = String.format("img_%s.%s", UUID.randomUUID(), ext);
+                PathVO pathVO = (PathVO) context.getBean("pathData");
+                String loadURL = pathVO.getLoadUrl();
+                String savePath = pathVO.getSavePath();
                 imgPath = String.format("%s%s", loadURL, newImageName);
                 String realPath = String.format("%s\\%s", savePath, newImageName);
                 File file_ = new File(realPath);
