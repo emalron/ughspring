@@ -21,4 +21,7 @@
 	<delete id="deleteScore" parameterType="String">
 		DELETE FROM t_score WHERE articleNo=#{id}
 	</delete>
+	<select id="dbname" resultType="String">
+		SELECT name FROM v$database
+	</select>
 </mapper>
